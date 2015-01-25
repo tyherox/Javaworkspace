@@ -1,0 +1,13 @@
+
+public class MainFrame {
+
+	public boolean victory()
+	{
+		return false;
+	}
+	
+	public double slope()
+	{
+		return 0.0;
+	}
+}

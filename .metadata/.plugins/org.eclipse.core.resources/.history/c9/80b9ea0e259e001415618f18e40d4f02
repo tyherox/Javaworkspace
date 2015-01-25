@@ -1,0 +1,99 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+public class Board extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Board frame = new Board();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Board() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 500);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
+		
+		final JPanel panel = new JPanel();
+		panel.setBackground(Color.BLUE);
+		panel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				panel.setBackground(Color.CYAN);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				panel.setBackground(Color.BLUE);
+			}
+		});
+		contentPane.add(panel, "1, 1, fill, fill");
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, "3, 1, fill, fill");
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, "5, 1, fill, fill");
+		
+		JPanel panel_3 = new JPanel();
+		contentPane.add(panel_3, "1, 3, fill, fill");
+		
+		JPanel panel_6 = new JPanel();
+		contentPane.add(panel_6, "3, 3, fill, fill");
+		
+		JPanel panel_5 = new JPanel();
+		contentPane.add(panel_5, "5, 3, fill, fill");
+		
+		JPanel panel_7 = new JPanel();
+		contentPane.add(panel_7, "1, 5, fill, fill");
+		
+		JPanel panel_4 = new JPanel();
+		contentPane.add(panel_4, "3, 5, fill, fill");
+		
+		JPanel panel_8 = new JPanel();
+		contentPane.add(panel_8, "5, 5, fill, fill");
+	}
+
+}

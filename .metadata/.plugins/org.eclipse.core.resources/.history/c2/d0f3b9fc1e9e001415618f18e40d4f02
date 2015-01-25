@@ -1,0 +1,163 @@
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Array;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
+
+public class Board extends JFrame {
+
+	MainFrame mainframe = new MainFrame();
+	compMove AI = new compMove();
+	private JPanel contentPane;
+	static ArrayList<int[]> pMap = new ArrayList<int[]>();
+	static ArrayList<JBoard> board = new ArrayList<JBoard>();
+	ActionListener Marklisten = new MarkListener();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Board frame = new Board();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Board() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 450);
+		contentPane = new JPanel();
+		contentPane.setBorder(null);
+		setContentPane(contentPane);
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
+		
+		JBoard board_1 = new JBoard(-1,1);
+		contentPane.add(board_1, "1, 1, fill, fill");
+		board_1.addActionListener(Marklisten);
+		board.add(board_1);
+		
+		JBoard board_2 = new JBoard(0,1);
+		contentPane.add(board_2, "3, 1, fill, fill");
+		board_2.addActionListener(Marklisten);
+		board.add(board_2);
+		
+		JBoard board_3 = new JBoard(1,1);
+		contentPane.add(board_3, "5, 1, fill, fill");
+		board_3.addActionListener(Marklisten);
+		board.add(board_3);
+		
+		JBoard board_4 = new JBoard(-1,0);
+		contentPane.add(board_4, "1, 3, fill, fill");
+		board_4.addActionListener(Marklisten);
+		board.add(board_4);
+		
+		JBoard board_5 = new JBoard(0,0);
+		contentPane.add(board_5, "3, 3, fill, fill");
+		board_5.addActionListener(Marklisten);
+		board.add(board_5);
+
+		JBoard board_6 = new JBoard(1,0);
+		contentPane.add(board_6, "5, 3, fill, fill");
+		board_6.addActionListener(Marklisten);
+		board.add(board_6);
+		
+		JBoard board_7 = new JBoard(-1,-1);
+		contentPane.add(board_7, "1, 5, fill, fill");
+		board_7.addActionListener(Marklisten);
+		board.add(board_7);
+		
+		JBoard board_8 = new JBoard(0,-1);
+		contentPane.add(board_8, "3, 5, fill, fill");
+		board_8.addActionListener(Marklisten);
+		board.add(board_8);
+		
+		JBoard board_9 = new JBoard(1,-1);
+		contentPane.add(board_9, "5, 5, fill, fill");
+		board_9.addActionListener(Marklisten);
+		board.add(board_9);
+		
+		AI.start(board);
+	}
+	
+	public void won()
+	{
+		for(int i = 0; i<board.size(); i++)
+		{
+			JBoard btn = board.get(i);
+			btn.setEnabled(false);
+		}
+	}
+	
+	public void updateMap(int[] coordinate)
+	{
+		pMap.add(coordinate);
+	}
+	
+	public static ArrayList currentMap()
+	{
+		return pMap; 
+	}
+
+	class MarkListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event) 
+		{ 
+			JBoard btn = (JBoard)event.getSource();
+			btn.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+			btn.moved("X");
+			updateMap(btn.getCoordinate());
+			board.remove(btn);
+			
+			if(mainframe.winCondition(pMap)==true)
+			{
+				won();
+			}
+			
+			AI.move(board);
+			
+			//int Coordinate[] = btn.getCoordinate();
+			//System.out.println(Coordinate[0]+", " + Coordinate[1]);
+		}
+	}
+	
+	public static void AImove(JBoard move)
+	{
+		move.moved("O");
+	}
+
+}
+
+
+
+

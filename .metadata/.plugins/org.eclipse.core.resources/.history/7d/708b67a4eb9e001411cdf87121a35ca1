@@ -1,0 +1,30 @@
+
+
+public class Coordinates {
+	int xc;
+	int yc;
+	
+	public Coordinates(int x, int y){
+		x = xc;
+		y = yc;
+		System.out.println(x + ", " + y);
+	}
+	
+	public double getXC()
+	{
+		return xc;
+	}
+	
+	public double getYC()
+	{
+		return yc;
+	}
+	
+	public double slope(Coordinates a, Coordinates b )
+	{
+		double slope = (a.getYC() - b.getYC())/(a.getXC() - b.getXC());
+		return slope; 
+	}
+	
+	
+}

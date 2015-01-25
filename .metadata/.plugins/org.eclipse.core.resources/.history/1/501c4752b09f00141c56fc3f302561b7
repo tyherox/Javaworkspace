@@ -1,0 +1,22 @@
+
+
+public class Coordinates {
+	double xc;
+	double yc;
+	
+	public Coordinates(double x, double y){
+		xc = x;
+		yc = y;
+		System.out.println(x + ", " + y);
+	}
+	
+	public double getXC()
+	{
+		return xc;
+	}
+	
+	public double getYC()
+	{
+		return yc;
+	}
+}

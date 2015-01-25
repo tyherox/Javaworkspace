@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+public class compMove
+{
+	MainFrame mainframe = new MainFrame();
+	static ArrayList<JBoard> board = new ArrayList<JBoard>();
+	static ArrayList<JBoard> aMoves = new ArrayList<JBoard>();
+	static ArrayList<JBoard> pMoves = new ArrayList<JBoard>();
+	static ArrayList<JBoard> Priority = new ArrayList<JBoard>();
+	
+	public void start(ArrayList<JBoard> Map)
+	{
+		board = Map;
+		
+		int[] c1,c2,c3;
+		double s1,s2;
+		if(Map.size()>2)
+		{
+			for(int i = 0; i<Map.size();i++)
+			{
+				c1 = board.get(i).getCoordinate();
+				
+				for(int t = 0; t<Map.size();t++)
+				{
+					if(t!=i)
+					{
+					c2 = board.get(t).getCoordinate();
+					s1 = mainframe.getSlope(c1,c2);
+					if(s1==1||s1==-1||s1==0)
+					{
+					for(int z = 0; z<Map.size();z++)
+					{
+						if(z!=t&&z!=i)
+						{
+						c3 = board.get(z).getCoordinate();
+						s2 = mainframe.getSlope(c2,c3);
+						if(s1==s2)
+						{
+							/*
+							System.out.println(s1 + ", " + s2);
+							int [] h = board.get(i).getCoordinate();
+							System.out.println(h[0] + ", " + h[1]);
+							h = board.get(z).getCoordinate();
+							System.out.println(h[0] + ", " + h[1]);
+							h = board.get(t).getCoordinate();
+							System.out.println(h[0] + ", " + h[1]);
+							*/
+							Priority.add(board.get(i));
+							Priority.add(board.get(z));
+							Priority.add(board.get(t));
+						}
+						}
+					}
+					}
+					}
+				}
+			}
+		}
+		ArrayList<JBoard> temp = new ArrayList<JBoard>(Priority);
+		Priority.clear();
+			for(int i = 0; i<temp.size();i++)
+			{
+				JBoard holder1 = temp.get(i);
+				int count = Collections.frequency(temp, holder1);
+				holder1.risk(count);
+				if(Priority.contains(holder1)==false)
+				{
+					Priority.add(holder1);
+				}
+			}
+			System.out.println(Priority.size());
+	}
+	
+	public void move(ArrayList<JBoard> Map)
+	{
+		JBoard holder1,holder2;
+		
+		board = Map;
+		
+		for(int i = 0; i<Priority.size(); i++)
+		{
+			if(board.contains(Priority.get(i))!=true)
+			{
+				Priority.remove(i);
+			} 
+		}
+		
+		JBoard Best = Priority.get(0);
+		
+		if(aMoves.size()>1)
+		{
+			for(int i = 1; i<board.size(); i++)
+			{
+				
+			}
+		}
+		
+		for(int i = 1; i<Priority.size(); i++)
+		{
+			holder1 = Priority.get(i);
+			
+			if(Best.getRisk()<holder1.getRisk())
+			{
+				//System.out.println(Best.getRisk() + ", " + holder1.getRisk());
+				Best=holder1;
+				break;
+			}
+		}
+		int[] h = Best.getCoordinate();
+		System.out.println(h[0] + ", " + h [1]);
+		aMoves.add(Best);
+		board.remove(Best);
+		Priority.remove(Best);
+		Board.AImove(Best);
+		
+	}
+}

@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+
+
+public class MainFrame {
+	
+	public boolean winCondition(ArrayList<int[]> Map)
+	{
+		
+		int[] c1,c2,c3;
+		double s1,s2;
+		if(Map.size()>2)
+		{
+			for(int i = 0; i<Map.size();i++)
+			{
+				c1 = Map.get(i);
+				
+				for(int t = 0; t<Map.size();t++)
+				{
+					if(t!=i)
+					{
+					c2 = Map.get(t);
+					s1 = getSlope(c1,c2);
+					if(s1==1||s1==-1||s1==0)
+					{
+					for(int z = 0; z<Map.size();z++)
+					{
+						if(z!=t&&z!=i)
+						{
+						c3 = Map.get(z);
+						s2 = getSlope(c2,c3);
+						if(s1==s2)
+						{
+							System.out.println(s1 + ", " + s2);
+							return true;
+						}
+						}
+					}
+					}
+					}
+				}
+			}
+		}
+		//System.out.println("did not win");
+		return false;
+	}
+	
+	public double readCoordinate(int[] Coordinate, String c)
+	{
+		if(c.equals("x"))
+		{
+			return Coordinate[0];
+		}
+		if(c.equals("y"))
+		{
+			return Coordinate[1];
+		}
+		//System.out.println("Reading Error");
+		return -1;
+	}
+	
+	public double getSlope(int[] c1, int[] c2)
+	{
+		double slope = (readCoordinate(c1,"y")-readCoordinate(c2,"y"))/(readCoordinate(c1,"x")-readCoordinate(c2,"x"));
+		//System.out.println("slope of " + c1[0] + ", " + c1[1] + " and " + c2[0] + ", " + c2[1] + " is " + slope);
+		return slope;
+	}
+	
+
+}

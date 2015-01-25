@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+
+
+public class MainFrame {
+
+	static ArrayList<JBoardT> board;
+	
+	public static boolean victory(ArrayList<JBoardT> map)
+	{
+		JBoardT a,b;
+		board = map;
+		if(board.size()<3)
+		{
+			return false; 
+		}
+		else
+		{
+			for(int i = 0; i<board.size(); i++)
+			{
+				a = board.get(i);
+				board.remove(a);
+				for(int t = 0; t<board.size(); t++)
+				{
+					b = board.get(t);
+					board.remove(t);
+					double s1 = Board.slope(a,b);
+					compare(b,s1);
+					board.add(b);
+				}
+				board.add(a);
+			}
+		}
+		
+		return false;
+	}
+	
+	private static boolean compare(JBoardT a, double s1)
+	{
+		for(int i = 0; i<board.size(); i++)
+		{
+			JBoardT b = board.get(i);
+			board.remove(i);
+			double s2 = Board.slope(a,b);
+			if(s1==s2)
+			{
+				return true;
+			}
+			else
+			{
+				compare(a,s1);
+			}
+			board.add(b);
+		}
+		return false;
+	}
+	
+}

@@ -1,0 +1,183 @@
+import java.util.ArrayList;
+
+
+public class Computer {
+
+	static ArrayList<JBoardT> temp = new ArrayList<JBoardT>();
+	static ArrayList<JBoardT> cBoard = new ArrayList<JBoardT>();
+	static ArrayList<JBoardT> pBoard = new ArrayList<JBoardT>();
+	static ArrayList<String> report = new ArrayList<String>();
+	static JBoardT place;
+	
+	public static void test(JBoardT a, JBoardT b)
+	{
+		cBoard.add(a);
+		Board.updateBoard(a);
+		cBoard.add(b);
+		Board.updateBoard(b);
+	}
+	
+	public static void updateAi(JBoardT a)
+	{
+		pBoard.add(a);
+	}
+	
+	public void clear()
+	{
+		temp.clear();
+		cBoard.clear();
+	}
+	public void startMove(ArrayList<JBoardT> board){
+		int score = -1000000000;
+		int ts = -1000000000;
+		report.clear();
+		System.out.println("at ai: " + board.size() + "///////////////////////////////////////////////");
+		temp = board;
+		for(int i = 0; i<temp.size();i++)
+		{
+			
+			JBoardT t = temp.get(i);
+			temp.remove(i);
+			cBoard.add(t);
+			System.out.println("at ai process: " + i);
+			System.out.println("i value " + t.getXC() + ", " + t.getYC());
+			if(cBoard.size()>=3)
+			{
+				if(MainFrame.victory(cBoard)==true)
+				{
+					System.out.println("preVictory "+ t.getXC() + ", " + t.getYC());
+					place = t;
+					temp.add(i,t);
+					cBoard.remove(t);
+					break;
+				}
+				
+			}
+			aiTurn=false;
+			ts = miniMax();
+			report.add("score for minimax at " + "i value " + t.getXC() + ", " + t.getYC() + " is "+ ts);
+			System.out.println(" ");
+			System.out.println(" ");
+			if(score<ts){
+				System.out.println("changed score");
+				System.out.println(" ");
+				score = ts;
+				place = t;
+			}
+			temp.add(i,t);
+			cBoard.remove(t);
+		}
+		for(int i = 0; i<report.size();i++)
+		{
+			System.out.println(" ");
+			System.out.println(report.get(i));
+		}
+		
+		System.out.println("i value " + place.getXC() + ", " + place.getYC());
+		Board.updateBoard(place);
+		cBoard.add(place);
+	}
+	
+	////// miniMax/////
+	
+	static int depth = 1;
+	boolean aiTurn = false;
+	int sa=-1000;
+	int za;
+	int sp=1000;
+	int zp;
+	JBoardT pc;
+	JBoardT ac; 
+	
+	private int miniMax(){
+		
+		//System.out.println("at minimax");
+		depth++;
+		
+		if(aiTurn==true)
+		{
+			for(int i = 0; i<temp.size();i++)
+			{
+				JBoardT t = temp.get(i);
+				temp.remove(i);
+				cBoard.add(t);
+				//System.out.println("at minimax processing: ai");
+				
+				if(MainFrame.victory(cBoard)==true)
+				{
+					//System.out.println("at minimax processing: ai win " + depth);
+					//System.out.println("i value" + t.getXC() + ", " + t.getYC());
+					temp.add(i,t);
+					cBoard.remove(t);
+					aiTurn=!aiTurn;
+					depth--;
+					return 100 - depth;
+				}
+				else
+				{
+					//System.out.println("at minimax processing: ai no win "  + depth);
+					//System.out.println("i value" + t.getXC() + ", " + t.getYC());
+					aiTurn=!aiTurn;
+					za = miniMax();
+					if(za>sa)
+					{
+						sa=za;
+					}
+					temp.add(i,t);
+					cBoard.remove(t);
+				}
+			}
+			depth--;
+			aiTurn=!aiTurn;
+			return sa;
+		}
+		
+		if(aiTurn==false)
+		{
+			for(int i = 0; i<temp.size();i++)
+			{
+				JBoardT t = temp.get(i);
+				temp.remove(i);
+				pBoard.add(t);
+				//System.out.println("at minimax processing: player");
+				
+				if(MainFrame.victory(pBoard)==true)
+				{
+					//System.out.println("at minimax processing: player win " + depth);
+					//System.out.println("i value" + t.getXC() + ", " + t.getYC());
+					temp.add(i,t);
+					pBoard.remove(t);
+					aiTurn=!aiTurn;
+					depth--;
+					return -100 + depth;
+				}
+				else
+				{
+					//System.out.println("at minimax processing: player no win "  + depth);
+					//System.out.println("i value" + t.getXC() + ", " + t.getYC());
+					aiTurn=!aiTurn;
+					zp = miniMax();
+					if(zp<sp)
+					{
+						sp=zp;
+					}
+					temp.add(i,t);
+					pBoard.remove(t);
+				}
+			}
+			depth--;
+			aiTurn=!aiTurn;
+			return sp;
+		}
+		
+		depth--;
+		aiTurn=!aiTurn;
+		return -10;
+	}
+	
+	/////////
+	
+	private int[] coordinate(){
+		return null;
+	}
+}

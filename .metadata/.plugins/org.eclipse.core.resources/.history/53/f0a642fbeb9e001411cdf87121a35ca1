@@ -1,0 +1,52 @@
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
+
+
+public class JBoardT extends JPanel {
+	
+	boolean pressed = false;
+	public JBoardT(){
+		setBackground(Color.white);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				if(pressed==false)
+				{
+					setBackground(Color.GRAY);
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(pressed==false)
+				{
+					setBackground(Color.white);
+				}
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(pressed==false)
+				{
+					setBackground(Color.BLUE);
+					Action();
+				}
+				pressed=true;
+			}
+		});
+	}
+	
+	public Coordinates getC(){
+		double x = this.getX();
+		double y = this.getY();
+		System.out.println(x + ", " + y);
+		Coordinates c = new Coordinates(x, y);
+		return c;
+	}
+	
+	private void Action()
+	{
+		Board.aiMove();
+	}
+}

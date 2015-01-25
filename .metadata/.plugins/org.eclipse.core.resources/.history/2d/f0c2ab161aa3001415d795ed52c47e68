@@ -1,0 +1,336 @@
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.JButton;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class Board<booelan> extends JFrame {
+
+	private JPanel contentPane;
+
+	/// booleans 
+	String test = "hi";
+	static ArrayList<JBoardT> board = new ArrayList<JBoardT>();
+	static ArrayList<JBoardT> pBoard = new ArrayList<JBoardT>();
+	static Computer ai = new Computer();
+	/**
+	 * Launch the application.
+	 */
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					intializeBoard();
+					Board frame = new Board();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	static private void intializeBoard()
+	{
+		
+	}
+	/**
+	 * 
+	 * Create the frame.
+	 */
+	public Board() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 550, 600);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(null);
+		setContentPane(contentPane);
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		
+		final JBoardT p1 = new JBoardT();
+		contentPane.add(p1, "2, 2, fill, fill");
+		
+		final JBoardT p2 = new JBoardT();
+		contentPane.add(p2, "4, 2, fill, fill");
+		
+		final JBoardT p3 = new JBoardT();
+		contentPane.add(p3, "6, 2, fill, fill");
+		
+		JBoardT boardT = new JBoardT();
+		contentPane.add(boardT, "8, 2, fill, fill");
+		
+		JBoardT boardT_1 = new JBoardT();
+		contentPane.add(boardT_1, "10, 2, fill, fill");
+		
+		JBoardT boardT_16 = new JBoardT();
+		contentPane.add(boardT_16, "12, 2, fill, fill");
+		
+		JBoardT boardT_17 = new JBoardT();
+		contentPane.add(boardT_17, "14, 2, fill, fill");
+		
+		final JBoardT p4 = new JBoardT();
+		contentPane.add(p4, "2, 4, fill, fill");
+		
+		final JBoardT p5 = new JBoardT();
+		contentPane.add(p5, "4, 4, fill, fill");
+		
+		final JBoardT p6 = new JBoardT();
+		contentPane.add(p6, "6, 4, fill, fill");
+		
+		JBoardT boardT_2 = new JBoardT();
+		contentPane.add(boardT_2, "8, 4, fill, fill");
+		
+		JBoardT boardT_3 = new JBoardT();
+		contentPane.add(boardT_3, "10, 4, fill, fill");
+		
+		JBoardT boardT_18 = new JBoardT();
+		contentPane.add(boardT_18, "12, 4, fill, fill");
+		
+		JBoardT boardT_19 = new JBoardT();
+		contentPane.add(boardT_19, "14, 4, fill, fill");
+		
+		final JBoardT p7 = new JBoardT();
+		contentPane.add(p7, "2, 6, fill, fill");
+		
+		final JBoardT p8 = new JBoardT();
+		contentPane.add(p8, "4, 6, fill, fill");
+		
+		final JBoardT p9 = new JBoardT();
+		contentPane.add(p9, "6, 6, fill, fill");
+		
+		JBoardT boardT_4 = new JBoardT();
+		contentPane.add(boardT_4, "8, 6, fill, fill");
+		
+		JBoardT boardT_5 = new JBoardT();
+		contentPane.add(boardT_5, "10, 6, fill, fill");
+		
+		board.add(p1);
+		board.add(p2);
+		board.add(p3);
+		board.add(p4);
+		board.add(p5);
+		board.add(p6);
+		board.add(p7);
+		board.add(p8);
+		board.add(p9);
+		
+		JBoardT boardT_20 = new JBoardT();
+		contentPane.add(boardT_20, "12, 6, fill, fill");
+		
+		JBoardT boardT_21 = new JBoardT();
+		contentPane.add(boardT_21, "14, 6, fill, fill");
+		
+		JBoardT boardT_6 = new JBoardT();
+		contentPane.add(boardT_6, "2, 8, fill, fill");
+		
+		JBoardT boardT_7 = new JBoardT();
+		contentPane.add(boardT_7, "4, 8, fill, fill");
+		
+		JBoardT boardT_8 = new JBoardT();
+		contentPane.add(boardT_8, "6, 8, fill, fill");
+		
+		JBoardT boardT_9 = new JBoardT();
+		contentPane.add(boardT_9, "8, 8, fill, fill");
+		
+		JBoardT boardT_10 = new JBoardT();
+		contentPane.add(boardT_10, "10, 8, fill, fill");
+		
+		JBoardT boardT_22 = new JBoardT();
+		contentPane.add(boardT_22, "12, 8, fill, fill");
+		
+		JBoardT boardT_23 = new JBoardT();
+		contentPane.add(boardT_23, "14, 8, fill, fill");
+		
+		JBoardT boardT_11 = new JBoardT();
+		contentPane.add(boardT_11, "2, 10, fill, fill");
+		
+		JBoardT boardT_12 = new JBoardT();
+		contentPane.add(boardT_12, "4, 10, fill, fill");
+		
+		JBoardT boardT_13 = new JBoardT();
+		contentPane.add(boardT_13, "6, 10, fill, fill");
+		
+		JBoardT boardT_14 = new JBoardT();
+		contentPane.add(boardT_14, "8, 10, fill, fill");
+		
+		JBoardT boardT_15 = new JBoardT();
+		contentPane.add(boardT_15, "10, 10, fill, fill");
+		
+		JBoardT boardT_24 = new JBoardT();
+		contentPane.add(boardT_24, "12, 10, fill, fill");
+		
+		JBoardT boardT_25 = new JBoardT();
+		contentPane.add(boardT_25, "14, 10, fill, fill");
+		
+		JBoardT boardT_26 = new JBoardT();
+		contentPane.add(boardT_26, "2, 12, fill, fill");
+		
+		JBoardT boardT_27 = new JBoardT();
+		contentPane.add(boardT_27, "4, 12, fill, fill");
+		
+		JBoardT boardT_31 = new JBoardT();
+		contentPane.add(boardT_31, "6, 12, fill, fill");
+		
+		JBoardT boardT_32 = new JBoardT();
+		contentPane.add(boardT_32, "8, 12, fill, fill");
+		
+		JBoardT boardT_34 = new JBoardT();
+		contentPane.add(boardT_34, "10, 12, fill, fill");
+		
+		JBoardT boardT_36 = new JBoardT();
+		contentPane.add(boardT_36, "12, 12, fill, fill");
+		
+		JBoardT boardT_38 = new JBoardT();
+		contentPane.add(boardT_38, "14, 12, fill, fill");
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.GRAY);
+		contentPane.add(panel, "1, 14, 15, 1, fill, fill");
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnResetButton = new JButton("Reset");
+		panel.add(btnResetButton, BorderLayout.CENTER);
+		btnResetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				p1.reset();
+				p2.reset();
+				p3.reset();
+				p4.reset();
+				p5.reset();
+				p6.reset();
+				p7.reset();
+				p8.reset();
+				p9.reset();
+				
+				board.clear();
+				pBoard.clear();
+				
+				board.add(p1);
+				board.add(p2);
+				board.add(p3);
+				board.add(p4);
+				board.add(p5);
+				board.add(p6);
+				board.add(p7);
+				board.add(p8);
+				board.add(p9);
+				
+				System.out.println("reset board size " + board.size() );
+				
+				ai.clear();
+			}
+		});
+		
+		//aiMove(null);
+	}
+	
+	public void test()
+	{
+		/*
+		p1.pClick();
+		pBoard.add(p1);
+		ai.updateAi(p1);
+		board.remove(p1);
+		p7.pClick();
+		pBoard.add(p7);
+		ai.updateAi(p7);
+		board.remove(p7);
+		
+		ai.test(p4, p2);*/
+	}
+	
+	public static void updateBoard(JBoardT a)
+	{
+		
+		boolean click = false;
+		for(int i = 0; i<board.size(); i++)
+		{
+			//System.out.println("i value " + board.get(i).getXC() + ", " + board.get(i).getYC());
+			if(a==board.get(i))
+			{
+				board.get(i).click();
+				//System.out.println("found");
+				click=true;
+			}
+			
+		}
+		if(click==false)
+		{
+			System.out.println("error");
+		}
+		board.remove(a);
+	}
+
+	public static void aiMove(JBoardT a)
+	{
+		if(a!=null)
+		{
+			pBoard.add(a);
+			board.remove(a);
+			ai.updateAi(a);	
+		}
+		
+		if(pBoard.size()>=3)
+		{
+			MainFrame.victory(pBoard);
+		}
+		//ai.startMove(board);
+	}
+	
+	public static double slope(JBoardT a, JBoardT b )
+	{
+		double slope = -(a.getYC() - b.getYC())/(a.getXC() - b.getXC());
+		if(slope == (Double.POSITIVE_INFINITY)|| slope == Double.NEGATIVE_INFINITY)
+		{
+			slope = Double.POSITIVE_INFINITY;
+		}
+		//System.out.println("c1: " + a.getXC() + ", " + a.getYC() + " c2: " + b.getXC() + ", " + b.getYC() + " slope: " + slope);
+		return slope; 
+	}
+	
+}
