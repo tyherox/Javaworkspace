@@ -28,20 +28,21 @@ public class Map extends JPanel {
         PLAINS
     };
 
-    public static final int NUM_ROWS = 20;
-    public static final int NUM_COLS = 20;
+    public static final int NUM_ROWS = 100;
+    public static final int NUM_COLS = 100;
 
-    public static final int PREFERRED_GRID_SIZE_PIXELS = 1000/NUM_ROWS;
-
-    // In reality you will probably want a class here to represent a map tile,
-    // which will include things like dimensions, color, properties in the
-    // game world.  Keeping simple just to illustrate.
+    public static int SIZE = 0;
+    public static int PREFERRED_GRID_SIZE_PIXELS;
+    
     private final Color[][] terrainGrid;
 
-    public Map(){
+    public Map(int size){
+    	SIZE = size;
+    	PREFERRED_GRID_SIZE_PIXELS =SIZE/NUM_ROWS;
+    	System.out.println(PREFERRED_GRID_SIZE_PIXELS);
         this.terrainGrid = new Color[NUM_ROWS][NUM_COLS];
         Random r = new Random();
-        // Randomize the terrain
+        
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
                 int randomTerrainIndex = r.nextInt(TERRAIN.length);
@@ -52,7 +53,25 @@ public class Map extends JPanel {
         int preferredWidth = NUM_COLS * PREFERRED_GRID_SIZE_PIXELS;
         int preferredHeight = NUM_ROWS * PREFERRED_GRID_SIZE_PIXELS;
         setPreferredSize(new Dimension(preferredWidth, preferredHeight));
-        
+    }
+    
+    public void zoom(String z)
+    {
+    	if(z.equals("in"))
+    	{
+    		SIZE = SIZE+30;
+    	}
+    	else
+    	{
+    		SIZE = SIZE-30;
+    	}
+    	System.out.println("new size: " + SIZE);
+    	PREFERRED_GRID_SIZE_PIXELS =SIZE/NUM_ROWS;
+    	int preferredWidth = NUM_COLS * PREFERRED_GRID_SIZE_PIXELS;
+        int preferredHeight = NUM_ROWS * PREFERRED_GRID_SIZE_PIXELS;
+        setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+        revalidate();
+        repaint();
     }
 
     @Override

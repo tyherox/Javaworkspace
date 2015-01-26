@@ -1,25 +1,20 @@
 package Main;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 public class GUI extends JFrame {
 
-	private volatile int draggedAtX, draggedAtY;
 	private JPanel contentPane;
-	ArrayList<JButton> components = new ArrayList<JButton>();
 
 	/**
 	 * Launch the application.
@@ -36,7 +31,6 @@ public class GUI extends JFrame {
 			}
 		});
 	}
-	
 
 	/**
 	 * Create the frame.
@@ -46,33 +40,29 @@ public class GUI extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		DragableC one = new DragableC("1");
-		DragableC two = new DragableC("2");
-		DragableC three = new DragableC("3");
-		contentPane.add(one);
-		contentPane.add(two);
-		contentPane.add(three);
-		components.add(one);
-		components.add(two);
-		components.add(three);
 		
-		JButton btnNewButton = new JButton("Organize");
+    	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    	
+    	if (gd.isFullScreenSupported()) {
+            setUndecorated(true);
+            gd.setFullScreenWindow(this);
+        } else {
+            System.err.println("Full screen not supported");
+            setSize(100, 100); // just something to let you see the window
+            setVisible(true);
+        }
+    	
+    	JButton btnNewButton = new JButton("Exit Full Screen");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				for(int i = 0; i<components.size(); i++)
-				{
-					JButton test = components.get(i);
-					int x = test.getLocation().x;	
-					int y = test.getLocation().y;	
-					
-					components.get(i).setLocation((((x + 99) / 100 ) * 50), (((y + 99) / 100 ) * 50));
-				}
-				
+				setVisible(false);
+				System.exit(0);
 			}
 		});
-		btnNewButton.setBounds(327, 243, 117, 29);
-		contentPane.add(btnNewButton);
+		contentPane.add(btnNewButton, BorderLayout.CENTER);
+		
 	}
+
 }
