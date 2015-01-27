@@ -1,9 +1,8 @@
-<<<<<<< Updated upstream
 INDEX VERSION 1.127+C:\Users\의현\Documents\GitHub\Javaworkspace\.metadata\.plugins\org.eclipse.jdt.core
+933114843.index
 3776425001.index
-358050146.index
-3631501703.index
 3176364129.index
+358050146.index
 3520661010.index
 2394392208.index
 949515501.index
@@ -15,13 +14,7 @@ INDEX VERSION 1.127+C:\Users\의현\Documents\GitHub\Javaworkspace\.metadata\.plug
 2958705335.index
 248351807.index
 881895235.index
-1654984216.index
 844601494.index
+1654984216.index
 847618560.index
 2143716467.index
-=======
-INDEX VERSION 1.127+/Users/JohnBae/Documents/workspace/.metadata/.plugins/org.eclipse.jdt.core
-2313988548.index
-2097786442.index
-2719467871.index
->>>>>>> Stashed changes
