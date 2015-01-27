@@ -23,7 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 
-public class wGUI extends JFrame {
+public class WPAD extends JFrame {
 
 	private JPanel contentPane;
 
@@ -34,7 +34,7 @@ public class wGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					wGUI frame = new wGUI();
+					WPAD frame = new WPAD();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class wGUI extends JFrame {
 	 * Create the frame.
 	 * @throws IOException 
 	 */
-	public wGUI() throws IOException {
+	public WPAD() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1200);
 		//Image background = ImageIO.read(getClass().getResource("Images/lotr.jpg"));
@@ -72,7 +72,7 @@ public class wGUI extends JFrame {
 		sb.setUI(new MyScrollbarUI());
 		sb.setBounds(30, 0, 26, 226);
 		sb.setPreferredSize(new Dimension(100, 0));
-		ScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		ScrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		ScrollPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		contentPane.add(ScrollPanel);
 		

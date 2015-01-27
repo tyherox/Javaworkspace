@@ -1,0 +1,27 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+
+public class MyScrollBarUI extends BasicScrollBarUI {
+	
+	MyScrollBarUI() throws IOException {
+    	
+        
+    }
+
+    @Override
+    protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+    	 g.setColor(new Color(137,144,144));
+    }
+
+    @Override
+    protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+        // your code
+    }
+}
