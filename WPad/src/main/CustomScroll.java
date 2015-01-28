@@ -23,10 +23,41 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
 public class CustomScroll extends JPanel {
 
     private Image imageThumb, imageTrack;
+    private JPanel thumb;
+    int y;
+    int x;
+    int py;
+    int px;
 
-   	public CustomScroll() throws IOException {
+   	public CustomScroll(int X, int Y) throws IOException {
     	if(new File("/Images/thumb.jpg").exists() && !new File("/Images/thumb.jpg").isDirectory()) {System.out.println("can't find");};
+    	setLayout(null);
         imageThumb = ImageIO.read(getClass().getResource("Images/thumb.png"));
         imageTrack = ImageIO.read(getClass().getResource("Images/track.png"));
+        thumb = new JPanel();
+        thumb.setBackground(Color.BLACK);
+        add(thumb);
+        
+        y= Y;
+		py = getY();
+		
+		x= X;
+		px = getX();
+        
+        thumb.setBounds(px, py, x, y);
+        revalidate();
+        repaint();
+        
     }
+	
+	public void updateGraphic(int position) {
+		
+		py = position/7;
+		
+		thumb.setBounds(px, py, x, y);
+		//System.out.println("x value: " + x);
+		revalidate();
+		repaint();
+	}
+
 }

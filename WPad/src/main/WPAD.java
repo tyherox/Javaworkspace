@@ -35,6 +35,8 @@ public class WPAD extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel toolBox;
+	private JTextPane writeArea;
+	private CustomScroll scrollbar;
 
 	/**
 	 * Launch the application.
@@ -88,9 +90,9 @@ public class WPAD extends JFrame {
 				contentPane.add(window);
 
 				//--- scrollbar implementation ---//
-				CustomScroll scrollbar = new CustomScroll();
-				scrollbar.setBounds(screenSize.width-screenSize.width/10, screenSize.height-screenSize.height, screenSize.width/10, screenSize.height);
-				scrollbar.setBackground(Color.GRAY);
+				scrollbar = new CustomScroll(screenSize.width/16,screenSize.height);
+				scrollbar.setBounds(0, 0, screenSize.width/16, screenSize.height);
+				//scrollbar.setBackground(Color.GRAY);
 				contentPane.add(scrollbar);
 				
 				//--- scrollbar optimization ---//
@@ -99,6 +101,7 @@ public class WPAD extends JFrame {
 					@Override
 					public void adjustmentValueChanged(AdjustmentEvent e) {
 						System.out.println(e.getValue());
+						scrollbar.updateGraphic(e.getValue());
 					}
 				});
 				sb.setPreferredSize(new Dimension(10, 0));
@@ -107,12 +110,12 @@ public class WPAD extends JFrame {
 			
 				//--- tool panel ---//
 				toolBox = new JPanel();
-				toolBox.setBorder(new LineBorder(new Color(0, 0, 0)));
 				toolBox.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent arg0) {
 						System.out.println("entered");
 						toolBox.setOpaque(true);
+						writeArea.setOpaque(true);
 						revalidate();
 						repaint();
 					}
@@ -120,6 +123,7 @@ public class WPAD extends JFrame {
 					public void mouseExited(MouseEvent e) {
 						System.out.println("exited");
 						toolBox.setOpaque(false);
+						writeArea.setOpaque(false);
 						revalidate();
 						repaint();
 					}
@@ -139,7 +143,7 @@ public class WPAD extends JFrame {
 				toolBox.add(btn2);
 				
 				//--- writing area ---//
-				JTextPane writeArea = new JTextPane();
+				writeArea = new JTextPane();
 				writeArea.setBackground(Color.LIGHT_GRAY);
 				writeArea.setFont(new Font("Monospaced", Font.PLAIN, 21));
 				writeArea.setMargin( new Insets(50,100,50,100) );
@@ -154,7 +158,7 @@ public class WPAD extends JFrame {
 						}
 					}
 				});
-				//writeArea.setOpaque(false);
+				writeArea.setOpaque(false);
 				window.setViewportView(writeArea);
 				
 				//// full screen mode code ////
