@@ -13,5 +13,7 @@
 <fullyQualifiedTypeName name="java.awt.event.AdjustmentListener"/>
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.swing.event.DocumentEvent"/>
 </qualifiedTypeNameHistroy>
