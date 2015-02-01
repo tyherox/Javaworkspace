@@ -6,7 +6,7 @@ import java.awt.Image;
 
 import javax.swing.JPanel;
 
-public class TPanel extends JPanel {
+public class TPanel extends JButton {
 
   private Image img;
 

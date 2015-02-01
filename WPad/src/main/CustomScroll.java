@@ -24,8 +24,8 @@ public class CustomScroll extends JPanel {
 
     private Image imageThumb, imageTrack;
     private JPanel thumb;
-    int y;
-    int x;
+    int sy;
+    int sx;
     int py;
     int px;
 
@@ -38,25 +38,31 @@ public class CustomScroll extends JPanel {
         thumb.setBackground(Color.BLACK);
         add(thumb);
         
-        y= Y;
+        sy= Y;
 		py = getY();
 		
-		x= X;
+		sx= X;
 		px = getX();
         
-        thumb.setBounds(px, py, x, y);
+        thumb.setBounds(px, py, sx, sy);
         revalidate();
         repaint();
-        
     }
 	
-	public void updateGraphic(int position) {
-		
-		py = position/7;
-		
-		thumb.setBounds(px, py, x, y);
-		//System.out.println("x value: " + x);
-		revalidate();
+	public void updateGraphic(double pChange, double sChange) {
+		System.out.println("e value: " + sChange);
+		System.out.println("change value: " + pChange);
+		py = (int) (0+(pChange*sy));
+		int ny = (int) (sChange*sy);
+		System.out.println("py value: " + py);
+		if(sChange==Double.POSITIVE_INFINITY)
+		{
+			thumb.setBounds(px, py, 0, 0);
+		}
+		else
+		{
+			thumb.setBounds(px, py, sx, ny);
+		}
 		repaint();
 	}
 

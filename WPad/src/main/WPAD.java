@@ -31,12 +31,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.LineBorder;
 
-public class WPAD extends JFrame {
+public class Wpad extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel toolBox;
 	private JTextPane writeArea;
 	private CustomScroll scrollbar;
+	private JScrollBar sb;
 
 	/**
 	 * Launch the application.
@@ -45,7 +46,7 @@ public class WPAD extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WPAD frame = new WPAD();
+					Wpad frame = new Wpad();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +59,7 @@ public class WPAD extends JFrame {
 	 * Create the frame.
 	 * @throws IOException 
 	 */
-	public WPAD() throws IOException {
+	public Wpad() throws IOException {
 		//--- frame settings ---//
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				setBounds(100, 100, 1920, 1200);
@@ -88,24 +89,6 @@ public class WPAD extends JFrame {
 				window.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 				window.setOpaque(false);
 				contentPane.add(window);
-
-				//--- scrollbar implementation ---//
-				scrollbar = new CustomScroll(screenSize.width/16,screenSize.height);
-				scrollbar.setBounds(0, 0, screenSize.width/16, screenSize.height);
-				//scrollbar.setBackground(Color.GRAY);
-				contentPane.add(scrollbar);
-				
-				//--- scrollbar optimization ---//
-				JScrollBar sb = window.getVerticalScrollBar();
-				sb.addAdjustmentListener( new AdjustmentListener(){
-					@Override
-					public void adjustmentValueChanged(AdjustmentEvent e) {
-						System.out.println(e.getValue());
-						scrollbar.updateGraphic(e.getValue());
-					}
-				});
-				sb.setPreferredSize(new Dimension(10, 0));
-				sb.setUnitIncrement(30);
 				
 			
 				//--- tool panel ---//
@@ -114,7 +97,7 @@ public class WPAD extends JFrame {
 					@Override
 					public void mouseEntered(MouseEvent arg0) {
 						System.out.println("entered");
-						toolBox.setOpaque(true);
+						toolBox.setOpaque(true); 
 						writeArea.setOpaque(true);
 						revalidate();
 						repaint();
@@ -160,6 +143,29 @@ public class WPAD extends JFrame {
 				});
 				writeArea.setOpaque(false);
 				window.setViewportView(writeArea);
+				
+				//--- scrollbar implementation ---//
+				scrollbar = new CustomScroll(screenSize.width/20,screenSize.height+10);
+				scrollbar.setBounds(0, 0, screenSize.width/20, screenSize.height+10);
+				scrollbar.setBackground(Color.WHITE);
+				contentPane.add(scrollbar);
+				
+				//--- scrollbar optimization ---//
+				sb = window.getVerticalScrollBar();
+				sb.addAdjustmentListener( new AdjustmentListener(){
+					@Override
+					public void adjustmentValueChanged(AdjustmentEvent e) {
+						System.out.println(" ");
+						System.out.println("e: " + e.getValue());
+						System.out.println("writeArea height: " + writeArea.getHeight());
+						if(writeArea.getHeight()!=0)
+						{
+							scrollbar.updateGraphic((double)e.getValue()/(double)(writeArea.getHeight()),800.000/writeArea.getHeight());
+						}
+					}
+				});
+				sb.setPreferredSize(new Dimension(0, 0));
+				sb.setUnitIncrement(30);
 				
 				//// full screen mode code ////
 		    	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
