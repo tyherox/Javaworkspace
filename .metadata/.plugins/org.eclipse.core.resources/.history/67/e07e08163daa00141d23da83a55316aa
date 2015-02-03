@@ -1,0 +1,103 @@
+import java.awt.EventQueue;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+
+public class written extends JFrame {
+
+	private JPanel contentPane;
+	private JTextPane textPane;
+	private JLabel timeCount;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					written frame = new written();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public written() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 600, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 62, 588, 410);
+		contentPane.add(scrollPane);
+		
+		textPane = new JTextPane();
+		scrollPane.setViewportView(textPane);
+		textPane.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				    warn("change");
+				  }
+				  public void removeUpdate(DocumentEvent e) {
+				    warn("remove");
+				  }
+				  public void insertUpdate(DocumentEvent e) {
+				    warn("insert");
+				  }
+
+				  public void warn(String location) {
+					
+					System.out.println(location);
+					/*
+				    if(textPane.getText().equals(""))
+				    {
+				    	System.out.println("empty");
+				    	textPane.setText("");
+				    }
+				    else
+				    {
+				    	System.out.println("typing");
+				    	long startTime = System.currentTimeMillis();
+				    	textPane.setText(Mainframe.find(textField.getText()));
+				    	long endTime = System.currentTimeMillis();
+				    	long duration = (endTime - startTime); 
+				    	timeCount.setText("Time: " + duration/1000.000 + " seconds");
+				    }*/
+				  }
+				});
+		
+		JLabel wordCount = new JLabel("Total Words: ");
+		wordCount.setBounds(6, 36, 212, 16);
+		contentPane.add(wordCount);
+		
+		timeCount = new JLabel("Time:");
+		timeCount.setBounds(360, 36, 212, 16);
+		contentPane.add(timeCount);
+		
+		try {
+			wordCount.setText("Total Words: " + Mainframe.intialize());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

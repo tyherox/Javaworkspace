@@ -112,7 +112,7 @@ public class Wpad extends JFrame {
 					}
 				});
 				toolBox.setBackground(Color.GRAY);
-				toolBox.setBounds((int) ((screenSize.width/2)+(SIZE.width/2)), (screenSize.height/2)-(SIZE.height/2), 70, 564);
+				toolBox.setBounds((screenSize.width/2)+(int)(SIZE.width/2), (screenSize.height/2)-(SIZE.height/2), 70, 500);
 				toolBox.setFocusable(true);
 				toolBox.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				toolBox.setOpaque(false);

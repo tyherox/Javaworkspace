@@ -3,7 +3,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -19,6 +18,7 @@ public class GUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextPane textPane;
+	private JLabel timeCount;
 
 	/**
 	 * Launch the application.
@@ -79,7 +79,11 @@ public class GUI extends JFrame {
 			    else
 			    {
 			    	System.out.println("typing");
+			    	long startTime = System.currentTimeMillis();
 			    	textPane.setText(Mainframe.find(textField.getText()));
+			    	long endTime = System.currentTimeMillis();
+			    	long duration = (endTime - startTime); 
+			    	timeCount.setText("Time: " + duration/1000.000 + " seconds");
 			    }
 			  }
 			});
@@ -88,7 +92,7 @@ public class GUI extends JFrame {
 		wordCount.setBounds(340, 6, 212, 16);
 		contentPane.add(wordCount);
 		
-		JLabel timeCount = new JLabel("Time:");
+		timeCount = new JLabel("Time:");
 		timeCount.setBounds(340, 34, 212, 16);
 		contentPane.add(timeCount);
 		
@@ -97,7 +101,7 @@ public class GUI extends JFrame {
 		contentPane.add(separator);
 		
 		try {
-			wordCount.setText("Total Words: " + Mainframe.intialize());
+			wordCount.setText("Total Words: " + Mainframe.initialize());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
