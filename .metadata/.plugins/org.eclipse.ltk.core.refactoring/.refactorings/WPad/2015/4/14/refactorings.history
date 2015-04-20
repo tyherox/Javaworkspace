@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;lblNewLabel&apos; in &apos;main.FileExplore.FileExplore()&apos; to &apos;lblTitle&apos;&#x0A;- Original project: &apos;WPad&apos;&#x0A;- Original element: &apos;main.FileExplore.FileExplore().lblNewLabel&apos;&#x0A;- Renamed element: &apos;lblNewLabel&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;lblNewLabel&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;main{FileExplore.java[FileExplore~FileExplore@lblNewLabel!1209!1249!1216!1226!QJLabel;!0!false" name="lblTitle" references="true" stamp="1428040552639" version="1.0"/>
+</session>

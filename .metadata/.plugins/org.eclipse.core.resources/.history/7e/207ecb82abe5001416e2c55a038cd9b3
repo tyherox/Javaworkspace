@@ -1,0 +1,140 @@
+package main;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.Color;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.JButton;
+
+import java.awt.Font;
+import java.awt.GridBagLayout;
+
+public class manager extends JFrame {
+
+	private JPanel contentPane;
+	static JTable test;
+	static DefaultTableModel tester;
+	static JScrollPane holder; 
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					manager frame = new manager();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public manager() {
+		
+		try {
+            UIManager.setLookAndFeel(new MetalLookAndFeel());
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 526, 470);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new EmptyBorder(0, 10, 0, 0));
+		setContentPane(contentPane);
+		
+		holder = new JScrollPane();
+		holder.setOpaque(false);
+		holder.getViewport().setOpaque(false);
+		tester = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
+		test = new JTable(tester);
+		test.setOpaque(false);
+		holder.setViewportView(test);
+		tester.setRowCount(10);
+		
+		test.setSelectionModel(new ForcedListSelectionModel());
+		
+		tester.addColumn("Name");
+		tester.addColumn("Date");
+		
+		tester.setValueAt("test 1",0,0);
+		tester.setValueAt("test 2",0,1);
+		test.setDefaultRenderer(test.getColumnClass(0), new john());
+		contentPane.add(holder);
+	}
+	
+
+	public class ForcedListSelectionModel extends DefaultListSelectionModel {
+
+	    public ForcedListSelectionModel () {
+	        setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	        addListSelectionListener(new ListSelectionListener() {
+
+				@Override
+				public void valueChanged(ListSelectionEvent arg0) {
+					int r = test.getSelectedRow();
+					int c = test.getSelectedColumn();
+					if(c==0&&tester.getRowCount()>0) {
+						test.addRowSelectionInterval(8, 9);
+					}
+					if(c==1&&tester.getRowCount()>0) {
+						test.addRowSelectionInterval(1, 1);
+					}
+				}
+	        	
+	        });
+	    }
+
+	    @Override
+	    public void clearSelection() {
+	    }
+
+	    @Override
+	    public void removeSelectionInterval(int index0, int index1) {
+	    }
+
+	}
+	
+	static class john extends DefaultTableCellRenderer
+	{
+				public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column)
+				{
+					super.getTableCellRendererComponent(table, value, selected, focused, row, column);
+					setOpaque(false);
+					return this;  
+				}
+	}
+}

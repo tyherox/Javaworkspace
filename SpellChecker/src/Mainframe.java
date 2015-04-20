@@ -11,26 +11,14 @@ public class Mainframe {
 	
 	static ArrayList<String> list = new ArrayList<String>();
 	
-	public static int initialize() throws IOException
-	{
-		int counter = 0;
-		File file = new File("SpellChecker\\src\\Vocab\\wordsEn.txt");
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		String line;
-		while ((line = br.readLine()) != null) {
-		   list.add(line);
-		   counter++;
-		}
-		br.close();
-		
-		return counter;
-	}
-	
-	public static String find(String f)
-	{
+	public static void find(String f) {
 		ArrayList<String> recommendation = fill(f);
 		
 		String result;
+		
+		System.out.println(f);
+		
+		/*
 
 		if(recommendation.get(0).equals("not found"))
 		{
@@ -46,7 +34,7 @@ public class Mainframe {
 		{
 			result = result +  "\t" + recommendation.get(i) + "\n";
 		}
-		return result;
+		return result;*/
 	}
 	
 	public static boolean check(String f)

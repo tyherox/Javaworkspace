@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 2 elements from project &apos;WPad&apos;&#x0A;- Original project: &apos;WPad&apos;&#x0A;- Original elements:&#x0A;     thumb.png&#x0A;     track.png" description="Delete elements" element1="src/main/Images/thumb.png" element2="src/main/Images/track.png" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="2" stamp="1425881295746" subPackages="false" version="1.0"/>
+</session>

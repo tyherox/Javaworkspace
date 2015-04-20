@@ -5,11 +5,21 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/JohnBae/Desktop/Backup Files/Program Files/workspace/Essay Repetition Checker Build 1.0"/>
+			<item value="/Users/JohnBae/Desktop/Backup Files/Program Files/workspace/Essay Repetition Checker Build 2.0"/>
+			<item value="/Users/JohnBae/Desktop/Backup Files/Program Files/workspace/Essay Repetition Checker 2.0"/>
 			<item value="C:\Users\의현\Documents\GitHub\Javaworkspace\SpellChecker"/>
 			<item value="/Users/JohnBae/Desktop/Backup Files/Program Files/workspace/Tutor Now"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
 		</list>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="526" key="DIALOG_WIDTH"/>
+		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+		<item value="529" key="DIALOG_HEIGHT"/>
+		<item value="457" key="DIALOG_X_ORIGIN"/>
+		<item value="22" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
